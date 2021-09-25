@@ -1,8 +1,3 @@
-# This canary ingress is used for cloudman autoscaling support
-# on activity. A 200 on this endpoint indicates that a user
-# is active on the system, and the cluster can be autoscaled
-# in anticipation of jobs
----
 {{- if .Values.ingress.canary.enabled -}}
 {{- $fullName := include "galaxy.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
@@ -16,6 +11,10 @@ apiVersion: networking.k8s.io/v1beta1
 {{ fail "This chart requires Kubernetes v1.14 or later" }}
 {{- end }}
 kind: Ingress
+# This canary ingress is used for cloudman autoscaling support
+# on activity. A 200 on this endpoint indicates that a user
+# is active on the system, and the cluster can be autoscaled
+# in anticipation of jobs
 metadata:
   name: {{ $fullName }}-activity-canary
   labels:
